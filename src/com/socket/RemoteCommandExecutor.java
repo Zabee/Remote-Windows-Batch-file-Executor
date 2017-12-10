@@ -7,14 +7,13 @@ public class RemoteCommandExecutor {
 
 	private static ServerSocket serverSocket;
 
-	public static void main(String[] args) throws IOException {
+	public RemoteCommandExecutor() throws IOException{
 		serverSocket = new ServerSocket(3000);
 		while (true) {
 			System.out.println("Waiting for client system to connect...");
 			Dispatcher dispatcher = () -> new ExecutorThread(serverSocket.accept());
 			dispatcher.dispatch();
 		}
-
 	}
 }
 

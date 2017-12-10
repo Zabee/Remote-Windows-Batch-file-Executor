@@ -9,19 +9,13 @@ import java.io.InputStreamReader;
 import java.net.Socket;
 import java.util.Properties;
 
-public class ClientThread {
-
-	public static void main(String[] args) {
-		new ProcessHandler().start();
-	}
-}
-
-class ProcessHandler extends Thread {
+public class ClientThread extends Thread{
 
 	private Socket sock;
 
 	@Override
 	public void run() {
+		System.out.println("Starting client machine");
 		String serverIP = null, targetFile = null;
 		File file = null;
 		try {
@@ -37,6 +31,7 @@ class ProcessHandler extends Thread {
 		while (true) {
 			try {
 				sock = new Socket(serverIP, 3000);
+				System.out.println("Client started and connected to server machine");
 				// receiving from server ( receiveRead object)
 				InputStream istream = sock.getInputStream();
 				BufferedReader receiveRead = new BufferedReader(new InputStreamReader(istream));
@@ -54,7 +49,7 @@ class ProcessHandler extends Thread {
 						if (process != null) {
 							System.out.println("The windows batch file running!!");
 							System.out.println("Client terminated!!");
-							System.exit(0);			
+							System.exit(0);
 						}
 					}
 
